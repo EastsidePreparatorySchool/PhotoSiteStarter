@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Photo Site</title>
+  <!-- The engine's layout rules. Themes are loaded on top of this by engine/app.js -->
+  <link rel="stylesheet" href="engine/base.css">
+</head>
+<body>
+  <header id="site-header">
+    <h1 id="site-title"></h1>
+    <p id="site-subtitle"></p>
+  </header>
+
+  <main id="gallery"></main>
+
+  <footer id="site-footer"></footer>
+
+  <!-- The lightbox: a big view of one photo. Hidden until a photo is clicked. -->
+  <div id="lightbox" hidden>
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <figure>
+      <img id="lightbox-image" alt="">
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+  </div>
+
+  <script src="engine/app.js"></script>
+</body>
+</html>

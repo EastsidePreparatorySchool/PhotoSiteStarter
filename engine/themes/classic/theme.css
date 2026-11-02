@@ -1,0 +1,11 @@
+/* Theme: classic. A light, clean look.
+   A theme is just a CSS file! Change the variables and rules below. */
+
+:root { --gap: 12px; }
+
+body { background: #fafafa; color: #222; font-family: Georgia, serif; }
+#site-title { margin: 0; font-weight: normal; letter-spacing: 0.1em; }
+.photo-card img { border-radius: 4px; transition: transform 0.2s; }
+.photo-card img:hover { transform: scale(1.02); }
+#lightbox { background: rgba(255, 255, 255, 0.95); }
+#lightbox-close { color: #222; }

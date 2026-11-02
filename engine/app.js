@@ -45,7 +45,7 @@ function showSiteInfo(site) {
   document.getElementById("site-footer").textContent = site.footer || "";
 }
 
-// Makes one photo "card": a picture with its title under it.
+// Makes one photo "card": a picture with its caption under it.
 function makePhotoCard(photo) {
   const figure = document.createElement("figure");
   figure.className = "photo-card";
@@ -56,7 +56,8 @@ function makePhotoCard(photo) {
   img.loading = "lazy"; // only download when scrolled near
 
   const caption = document.createElement("figcaption");
-  caption.textContent = photo.title || "";
+  // "caption" is the short text. If you didn't write one, we use the title.
+  caption.textContent = photo.caption || photo.title || "";
 
   figure.appendChild(img);
   figure.appendChild(caption);
@@ -80,13 +81,40 @@ function showGallery(photos) {
 
 const lightbox = document.getElementById("lightbox");
 
-function openLightbox(photo) {
+async function openLightbox(photo) {
   document.getElementById("lightbox-image").src = "data/images/" + photo.file;
   document.getElementById("lightbox-image").alt = photo.title || photo.file;
   // textContent (not innerHTML) keeps text safe: it can never run as code.
-  document.getElementById("lightbox-caption").textContent =
-    [photo.title, photo.description].filter(Boolean).join(" - ");
+  document.getElementById("lightbox-title").textContent = photo.title || "";
+  document.getElementById("lightbox-caption").textContent = photo.caption || "";
+  document.getElementById("lightbox-description").textContent = photo.description || "";
+  const exifLine = document.getElementById("lightbox-exif");
+  exifLine.textContent = "";
   lightbox.hidden = false;
+
+  // Camera info is a bonus. Turn it off for a photo with "exif": false.
+  if (photo.exif === false) return;
+  // Anything you type in "exif" in photos.json wins over what the file says.
+  // This is how scanned photos can have camera info too.
+  const typedExif = typeof photo.exif === "object" ? photo.exif : {};
+  const fileExif = await getFileExif(photo.file);
+  // If the user already opened a different photo while we waited, stop.
+  if (lightbox.hidden || document.getElementById("lightbox-title").textContent !== (photo.title || "")) return;
+  exifLine.textContent = formatExif(Object.assign({}, fileExif, typedExif));
+}
+
+// Reads EXIF from the image file. Remembers results so each file is read once.
+const exifCache = {};
+async function getFileExif(file) {
+  if (!(file in exifCache)) {
+    try {
+      const response = await fetch("data/images/" + file);
+      exifCache[file] = readExif(await response.arrayBuffer());
+    } catch (error) {
+      exifCache[file] = {}; // couldn't read it: no problem
+    }
+  }
+  return exifCache[file];
 }
 
 function closeLightbox() {

@@ -14,6 +14,7 @@ The repo is split into two parts so you can **update the engine without losing y
 ```
 index.html            page skeleton
 engine/
+  exif.js             reads camera info from JPEGs (optional)
   app.js              the code (heavily commented)
   base.css            layout
   themes/classic/     built-in theme
@@ -36,6 +37,11 @@ data/
      { "file": "sunset.jpg", "title": "Sunset", "description": "Taken at the beach." }
    ]
    ```
+   Only `file` is required. Other fields (all optional):
+   - `title`: the photo's name (shown in the big view)
+   - `caption`: short text under the thumbnail (falls back to the title)
+   - `description`: longer text shown in the big view
+   - `exif`: camera info is read automatically from JPEG files and shown in the big view. For scanned photos with no camera data, type your own, e.g. `"exif": { "make": "Canon", "model": "AE-1", "fNumber": 8, "exposureTime": 0.004, "iso": 400, "dateTaken": "1985:06:01" }`. Use `"exif": false` to hide it.
 5. Edit `data/site.json` for your title, subtitle and footer.
 6. Visit `https://YOUR-USERNAME.github.io/PhotoSiteStarter/`.
 

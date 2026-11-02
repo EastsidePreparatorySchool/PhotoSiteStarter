@@ -22,10 +22,16 @@
     <button id="lightbox-close" aria-label="Close">&times;</button>
     <figure>
       <img id="lightbox-image" alt="">
-      <figcaption id="lightbox-caption"></figcaption>
+      <figcaption>
+        <strong id="lightbox-title"></strong>
+        <em id="lightbox-caption"></em>
+        <p id="lightbox-description"></p>
+        <small id="lightbox-exif"></small>
+      </figcaption>
     </figure>
   </div>
 
+  <script src="engine/exif.js"></script>
   <script src="engine/app.js"></script>
 </body>
 </html>

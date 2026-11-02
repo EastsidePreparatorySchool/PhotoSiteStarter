@@ -33,3 +33,6 @@ body { margin: 0; }
   position: absolute; top: 1rem; right: 1.5rem;
   font-size: 2rem; background: none; border: none; cursor: pointer;
 }
+
+#lightbox figcaption > * { display: block; margin: 0.3rem 0; }
+#lightbox-exif { opacity: 0.7; }

@@ -1,0 +1,8 @@
+[
+  {
+    "file": "example.jpg",
+    "title": "Replace me!",
+    "caption": "A short caption",
+    "description": "Put your image in data/images/ and list it here."
+  }
+]

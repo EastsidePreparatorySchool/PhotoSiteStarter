@@ -1,0 +1,9 @@
+/* Your own theme! Copy this folder, rename it (e.g. data/themes/ocean),
+   then set "theme": "ocean" in data/site.json.
+   Change the colors, fonts and spacing below and refresh the page. */
+
+:root { --gap: 20px; }
+
+body { background: #e0f4ff; color: #034; font-family: "Comic Sans MS", cursive; }
+#lightbox { background: rgba(224, 244, 255, 0.96); }
+#lightbox-close { color: #034; }
